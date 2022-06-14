@@ -40,7 +40,7 @@ app.mount('/', StaticFiles(directory="../../static", html=True), name="static")
 ## Es werden 30 Einträge zurück gegeben.
 ###
 @api_app.get("/entfernung")
-async def read_root(longitude, latitude):
+async def read_root(longitude: float, latitude: float):
     stationsdaten = pd.read_csv (r'../../daten/2022-06-11-stations.csv')
     geodaten = geopandas.GeoDataFrame(stationsdaten, geometry=geopandas.points_from_xy(stationsdaten.longitude, stationsdaten.latitude, crs='epsg:4326'))
 
