@@ -59,3 +59,12 @@ Für die Challenges und das Backend wird Python als Programmiersprache genutzt. 
 
 Die Oberfläche wird mittels HTML/CSS und JavaScript umgesetzt. Zur Hilfe wird JQuery und Bootstrap verwendet. 
 Für Geo-Karten wird Leaflet genutzt.
+
+## Installation
+
+Für die Verwaltung der Python Version und der Abhängigkeiten verwenden wir [Mini Conda](https://docs.conda.io/en/latest/miniconda.html).
+Wenn dies installiert ist kann über das Terminal ein neues Environment angelegt werden:
+
+***conda env create -n praktikum --file ENV.yml**
+
+Weite hilfreiche Tips gibt es im [CheatShee](https://docs.conda.io/projects/conda/en/latest/_downloads/843d9e0198f2a193a3484886fa28163c/conda-cheatsheet.pdf)
