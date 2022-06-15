@@ -43,6 +43,10 @@ Da wir alle Informationen zusammen haben, geht es jetzt ans Eingemachte. In Chal
 
 Mit den Daten aus dem Backend wird in dieser Challenge ein Backend entwickelt, das es Konsument_innen erlaubt selbst zu suchen und diese Daten anzuschauen.
 
+### Challenge 6 - Geo Karte
+
+Diese Challenge nutzt die Daten aus dem Backend und stellt sie auf einer Geo-Karte mit entsprechenden Logos dar. Jede Tankstelle hat ein Popup, was die Preise des Tages anzeigt.
+
 ## Technoliogien
 
 Als Technologien werden die folgenden Frameworks und Programmiersprachen genutzt:
@@ -53,4 +57,5 @@ Für die Challenges und das Backend wird Python als Programmiersprache genutzt. 
 
 ### Frontend
 
-Die Oberfläche wird mittels HTML/CSS und JavaScript umgesetzt. Zur Hilfe wird JQuery und Bootstrap verwendet.
+Die Oberfläche wird mittels HTML/CSS und JavaScript umgesetzt. Zur Hilfe wird JQuery und Bootstrap verwendet. 
+Für Geo-Karten wird Leaflet genutzt.

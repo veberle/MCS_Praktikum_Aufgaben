@@ -53,9 +53,9 @@ async def read_root(longitude: float, latitude: float):
     preisinformationen = preisinformationen.groupby('station_uuid').mean()
     bewegungsdaten = pd.merge(preisinformationen, umgewandelt, left_on='station_uuid', right_on='uuid')
     bewegungsdaten = bewegungsdaten.sort_values(by=['entfernung'], ascending=True)
-    ergebnis = bewegungsdaten.head(30)
 
-    # Umwandeln des Indexes auf String, da der JSON-Serialisierer es so haben möchte ...
-    ergebnis.index = ergebnis.index.map(str)
+    ergebnis = bewegungsdaten.head(30)
+    print(ergebnis)
+
     # Ergebnis als Index Dictonary zurückgeben
-    return ergebnis.to_dict('index')
+    return ergebnis.to_dict('records')

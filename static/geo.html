@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- JQuery einbinden um JavaScript zu vereinfachen, siehe https://jquery.com/ -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <!-- Leaflet für Geo Karten einbinden, siehe https://leafletjs.com/-->    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
+        integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
+        crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
+        integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
+        crossorigin=""></script>
+
+    <title>Geo Karte</title>
+    <style>
+      body {
+            padding: 0;
+            margin: 0;
+        }
+        html, body, #map {
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<!-- Hier folgen globale JavaScript Anweisungen -->
+<script type="text/javascript">
+    /** Diese Funktion wird ausgeführt, wenn die Seite vollständig geladen wurde **/
+    $(document).ready(function () {   
+      /** Karte auf die aktuelle Position setzen **/     
+        var map = L.map('map')
+        map.locate({setView: true, maxZoom: 16});
+        /** OpenStreetMap laden **/
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
+
+      /** https://developer.mozilla.org/de/docs/Web/API/Geolocation_API **/
+      /** Abfragen ob GeoLocations im Browser überhaupt möglich sind **/
+      if ("geolocation" in navigator) {
+        /* geolocation funktioniert, jetzt die Position abfragen */
+        navigator.geolocation.getCurrentPosition(function(position) {
+          /** Einen Pin an die aktuelle Position setzen **/
+          var marker = L.marker([position.coords.latitude, position.coords.longitude]).addTo(map);
+
+          /** Daten über die API laden **/
+          $.getJSON('http://localhost:8000/api/entfernung?longitude='+position.coords.longitude+'&latitude='+position.coords.latitude, function(data) {
+            /** Das Popup soll nur beim ersten Marker gesetzt werden **/
+            var popup = null;
+
+            $.each(data, function(index, value) {
+              var logo, marker = null;
+              /** Wenn die Marke der Tankstelle bekannt ist, soll hierfür das passende Logo geladen werden, falls nicht wird eine Voreinstellung geladen **/
+              if ( value['brand'] != null) {
+                logo = L.icon({iconUrl: './img/company/' + value['brand'].toUpperCase() + '.gif'});
+              } else {
+                logo = L.icon({iconUrl: './img/company/default.png'});
+              }
+
+              /** Marker mit Logo setzen **/
+              var marker = L.marker([value['latitude'], value['longitude']], {icon: logo}).addTo(map);
+
+              /** Popup mit Preisen erzeugen **/
+              var tmp = marker.bindPopup('<b>' + value['name'] + '</b><br><ul><li>E5: ' + value['e5'].toFixed(2) + ' €</li><li>E10: ' + value['e10'].toFixed(2) + ' €</li><li>Diesel: ' + value['diesel'].toFixed(2) + ' €</li></ul>');
+              /** Popup nur beim ersten Mal öffnen **/  
+              if (popup == null) {
+                popup = tmp;
+                popup.openPopup();
+              }
+            });
+          });
+        });
+      } else {
+        /* geolocation funktioniert NICHT, Meldung zum debuggen in die Konsole schreiben */
+        console.log("Standort nicht ermittelbar")
+      }
+    });
+</script>
+
+<body>
+    <div id="map"></div>
+</body>
+
+</html>
