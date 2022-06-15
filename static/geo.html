@@ -4,7 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="Description" content="Eine WebApp, die Tankstellen in der Nähe auf einer GeoKarte anzeigt und die Tagespreise dazu auflistet.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Meta Einstellungen für iOS -->
+    <link rel="shortcut icon" href="./img/mcs_logo.png">
+    <link rel="apple-touch-icon" href="./img/mcs_logo.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
 
     <!-- JQuery einbinden um JavaScript zu vereinfachen, siehe https://jquery.com/ -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
@@ -69,7 +74,7 @@
               var marker = L.marker([value['latitude'], value['longitude']], {icon: logo}).addTo(map);
 
               /** Popup mit Preisen erzeugen **/
-              var tmp = marker.bindPopup('<b>' + value['name'] + '</b><br><ul><li>E5: ' + value['e5'].toFixed(2) + ' €</li><li>E10: ' + value['e10'].toFixed(2) + ' €</li><li>Diesel: ' + value['diesel'].toFixed(2) + ' €</li></ul>');
+              var tmp = marker.bindPopup('<a href="http://maps.apple.com/?daddr=='+ value['latitude'] +',' + value['longitude'] + '">' + value['name'] + '</a><br><ul><li>E5: ' + value['e5'].toFixed(2) + ' €</li><li>E10: ' + value['e10'].toFixed(2) + ' €</li><li>Diesel: ' + value['diesel'].toFixed(2) + ' €</li></ul>');
               /** Popup nur beim ersten Mal öffnen **/  
               if (popup == null) {
                 popup = tmp;
