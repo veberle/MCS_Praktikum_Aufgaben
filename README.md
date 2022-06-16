@@ -68,3 +68,15 @@ Wenn dies installiert ist kann über das Terminal ein neues Environment angelegt
 ***conda env create -n praktikum --file ENV.yml**
 
 Weite hilfreiche Tips gibt es im [CheatShee](https://docs.conda.io/projects/conda/en/latest/_downloads/843d9e0198f2a193a3484886fa28163c/conda-cheatsheet.pdf)
+
+conda create -n praktikum
+conda activate praktikum 
+
+conda install -c conda-forge notebook
+conda install -c anaconda ipykernel
+
+conda install pandas
+conda install --channel conda-forge geopandas
+conda install -c conda-forge orjson
+conda install -c conda-forge uvicorn
+conda install -c conda-forge fastapi
