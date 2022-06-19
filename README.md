@@ -63,20 +63,35 @@ Für Geo-Karten wird Leaflet genutzt.
 ## Installation
 
 Für die Verwaltung der Python Version und der Abhängigkeiten verwenden wir [Mini Conda](https://docs.conda.io/en/latest/miniconda.html).
-Wenn dies installiert ist kann über das Terminal ein neues Environment angelegt werden:
 
-***conda env create -n praktikum --file ENV.yml**
+*Achtung:* Bei der Installation darauf achten, dass Miniconda dem Pfad hinzugefügt wird!
 
-Weite hilfreiche Tips gibt es im [CheatShee](https://docs.conda.io/projects/conda/en/latest/_downloads/843d9e0198f2a193a3484886fa28163c/conda-cheatsheet.pdf)
+Anschließend kann man ein Terminal (Powershell, Bash, CMD, etc) öffnen und dort "conda info" eingeben. Wenn die Installation erfolgreich war, scheint jetzt eine Infoanzeige über die Installation.
+
+### Umgebung einrichten
+
+Für dieses Projekt erstellen wir ein eigenes Environment in dem alle Bibliotheken installiert werden.
 
 conda create -n praktikum
-conda activate praktikum 
+conda activate praktikum
+
+### Jupyter Notebook installieren
+
+Dieses Projekt nutzt Jupyter Notebooks um wichtige Inhalte zu vermitteln. Die Installation erfolgt so:
 
 conda install -c conda-forge notebook
-conda install -c anaconda ipykernel
+conda install -c conda-forge ipykernel
 
-conda install pandas
-conda install --channel conda-forge geopandas
+### Bibliotheken installieren
+
+Damit die erstlichen Bibliotheken installiert werden, müssen die folgenden Befehle ausgeführt werden:
+
+conda install -c conda-forge pandas
+conda install -c conda-forge geopandas
 conda install -c conda-forge orjson
 conda install -c conda-forge uvicorn
 conda install -c conda-forge fastapi
+
+### Weiteres
+
+Weite hilfreiche Tips gibt es im [CheatShee](https://docs.conda.io/projects/conda/en/latest/_downloads/843d9e0198f2a193a3484886fa28163c/conda-cheatsheet.pdf)
