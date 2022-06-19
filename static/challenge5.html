@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="Description" content="Eine WebApp zum Anzeigen der Tagespreise bei Tankstellen in der Nähe.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Meta Einstellungen für iOS -->
+    <link rel="shortcut icon" href="./img/mcs_logo.png">
+    <link rel="apple-touch-icon" href="./img/mcs_logo.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <!-- JQuery einbinden um JavaScript zu vereinfachen, siehe https://jquery.com/ -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <!-- Bootstrap 4 einbinden, siehe https://getbootstrap.com/docs/4.6/getting-started/introduction/-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+    <!-- Bootstrap 4 Theme cerulean auswählen, siehe https://bootswatch.com/cerulean/ -->
+    <link rel="stylesheet" type="text/css" href="https://bootswatch.com/4/cerulean/bootstrap.min.css">
+    
+  
+    <!-- DataTables eibinden, siehe https://datatables.net/ -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+    <!-- Responsive Design, siehe https://datatables.net/extensions/responsive/ -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.dataTables.min.css"/>
+    <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
+ 
+
+    <!-- MCS Styling -->
+    <link rel="stylesheet" type="text/css" href="./mcs.css">
+
+    <title>MCS Entfernungsmesser</title>
+  </head>
+
+  <!-- Hier folgen globale JavaScript Anweisungen -->
+  <script type="text/javascript">
+    /** Diese Funktion wird ausgeführt, wenn die Seite vollständig geladen wurde **/
+    $(document).ready(function() {
+      /** https://developer.mozilla.org/de/docs/Web/API/Geolocation_API **/
+      /** Abfragen ob GeoLocations im Browser überhaupt möglich sind **/
+      if ("geolocation" in navigator) {
+        /* geolocation funktioniert, jetzt die Position abfragen */
+        navigator.geolocation.getCurrentPosition(function(position) {
+          /** Werte in die Eingabefelder schreiben **/
+          // TODO implementieren
+        });
+      } else {
+        /* geolocation funktioniert NICHT, Meldung zum debuggen in die Konsole schreiben */
+        console.log("Standort nicht ermittelbar")
+      }
+
+      /** Die Tabelle in eine DataTable umwandeln, damit sortieren und filtern funktioniert **/
+      // TODO implementieren
+
+      /** Tabelle löschen **/
+      // TODO implementieren
+    
+      /** Daten über die API laden **/
+      $.getJSON('http://localhost:8000/api/entfernung?longitude='+longitude+'&latitude='+latitude, function(data) {
+        $.each(data, function(index, value) {
+          /** Daten zeilenweise zur Tabelle hinzufügen **/
+          // TODO implementieren
+        });
+      });   
+    }); 
+
+
+  </script>
+  <body>    
+
+  <!-- Navigationsbar, siehe https://getbootstrap.com/docs/4.0/components/navbar/-->
+
+  <!-- TODO Umsetzen -->
+
+  <!-- Card, siehe https://getbootstrap.com/docs/4.0/components/card/ -->
+  <!-- TODO Umsetzen -->
+
+    <!-- Input Group, siehe https://getbootstrap.com/docs/4.0/components/input-group/ -->
+  <!-- TODO Umsetzen -->
+
+    <!-- Tabelle mit Daten, siehe https://getbootstrap.com/docs/4.0/content/tables/ -->
+  <!-- TODO Umsetzen -->  
+
+  </body>
+</html>

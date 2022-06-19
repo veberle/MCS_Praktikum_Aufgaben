@@ -40,13 +40,9 @@
     /** Diese Funktion wird ausgeführt, wenn die Seite vollständig geladen wurde **/
     $(document).ready(function () {   
       /** Karte auf die aktuelle Position setzen **/     
-        var map = L.map('map')
-        map.locate({setView: true, maxZoom: 16});
+        // TODO Implementieren
         /** OpenStreetMap laden **/
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '© OpenStreetMap'
-        }).addTo(map);
+        // TODO Implementieren
 
       /** https://developer.mozilla.org/de/docs/Web/API/Geolocation_API **/
       /** Abfragen ob GeoLocations im Browser überhaupt möglich sind **/
@@ -54,34 +50,14 @@
         /* geolocation funktioniert, jetzt die Position abfragen */
         navigator.geolocation.getCurrentPosition(function(position) {
           /** Einen Pin an die aktuelle Position setzen **/
-          var marker = L.marker([position.coords.latitude, position.coords.longitude]).addTo(map);
+          // TODO Implementieren
 
           /** Daten über die API laden **/
-          $.getJSON('http://localhost:8000/api/entfernung?longitude='+position.coords.longitude+'&latitude='+position.coords.latitude, function(data) {
-            /** Das Popup soll nur beim ersten Marker gesetzt werden **/
-            var popup = null;
+          // TODO Implementiere
 
-            $.each(data, function(index, value) {
-              var logo, marker = null;
-              /** Wenn die Marke der Tankstelle bekannt ist, soll hierfür das passende Logo geladen werden, falls nicht wird eine Voreinstellung geladen **/
-              if ( value['brand'] != null) {
-                logo = L.icon({iconUrl: './img/company/' + value['brand'].toUpperCase() + '.gif'});
-              } else {
-                logo = L.icon({iconUrl: './img/company/default.png'});
-              }
+              /** Marker setzen **/
+              // TODO Implementieren
 
-              /** Marker mit Logo setzen **/
-              var marker = L.marker([value['latitude'], value['longitude']], {icon: logo}).addTo(map);
-
-              /** Popup mit Preisen erzeugen **/
-              var tmp = marker.bindPopup('<a href="http://maps.apple.com/?daddr=='+ value['latitude'] +',' + value['longitude'] + '">' + value['name'] + '</a><br><ul><li>E5: ' + value['e5'].toFixed(2) + ' €</li><li>E10: ' + value['e10'].toFixed(2) + ' €</li><li>Diesel: ' + value['diesel'].toFixed(2) + ' €</li></ul>');
-              /** Popup nur beim ersten Mal öffnen **/  
-              if (popup == null) {
-                popup = tmp;
-                popup.openPopup();
-              }
-            });
-          });
         });
       } else {
         /* geolocation funktioniert NICHT, Meldung zum debuggen in die Konsole schreiben */
