@@ -71,7 +71,7 @@
         tabelle.clear();
       
         /** Daten über die API laden **/
-        $.getJSON('http://localhost:8000/api/entfernung?longitude='+longitude+'&latitude='+latitude, function(data) {
+        $.getJSON('./api/entfernung?longitude='+longitude+'&latitude='+latitude, function(data) {
           $.each(data, function(index, value) {
             /** Daten zeilenweise zur Tabelle hinzufügen **/
             tabelle.row.add([value['entfernung'], value['name'], value['brand'],value['city'],value['street'],value['diesel'].toFixed(2), value['e5'].toFixed(2), value['e10'].toFixed(2)]).draw( false );

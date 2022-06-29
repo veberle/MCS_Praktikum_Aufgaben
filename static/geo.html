@@ -57,7 +57,7 @@
           var marker = L.marker([position.coords.latitude, position.coords.longitude]).addTo(map);
 
           /** Daten über die API laden **/
-          $.getJSON('http://localhost:8000/api/entfernung?longitude='+position.coords.longitude+'&latitude='+position.coords.latitude, function(data) {
+          $.getJSON('./api/entfernung?longitude='+position.coords.longitude+'&latitude='+position.coords.latitude, function(data) {
             /** Das Popup soll nur beim ersten Marker gesetzt werden **/
             var popup = null;
 
