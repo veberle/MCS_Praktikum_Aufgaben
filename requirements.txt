@@ -1,0 +1,9 @@
+fastapi==0.78.0
+geopandas==0.11.0
+orjson==3.7.5
+pandas==1.4.3
+Shapely==1.8.2
+uvicorn==0.12.3
+aiofiles==0.6.0
+python-multipart==0.0.5
+jinja2==2.11.2
