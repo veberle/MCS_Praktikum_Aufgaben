@@ -1,2 +1,1 @@
-cd ./src/challenges/
-uvicorn challenge4:app --reload   
+uvicorn src.challenges.challenge4:app --reload   

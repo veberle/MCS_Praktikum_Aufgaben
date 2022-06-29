@@ -32,7 +32,7 @@ api_app.include_router(router)
 # Definition der Oberfläche
 app = FastAPI(title="die Oberfläche")
 app.mount('/api', api_app)
-app.mount('/', StaticFiles(directory="../../static", html=True), name="static")
+app.mount('/', StaticFiles(directory="./static", html=True), name="static")
 
 
 ###
@@ -41,7 +41,7 @@ app.mount('/', StaticFiles(directory="../../static", html=True), name="static")
 ###
 @api_app.get("/entfernung")
 async def read_root(longitude: float, latitude: float):
-    stationsdaten = pd.read_csv (r'../../daten/2022-06-11-stations.csv')
+    stationsdaten = pd.read_csv (r'./daten/2022-06-11-stations.csv')
     geodaten = geopandas.GeoDataFrame(stationsdaten, geometry=geopandas.points_from_xy(stationsdaten.longitude, stationsdaten.latitude, crs='epsg:4326'))
 
     mcs = geopandas.GeoDataFrame(geometry=[Point(float(longitude), float(latitude))], crs='epsg:4326')
@@ -49,7 +49,7 @@ async def read_root(longitude: float, latitude: float):
     umgewandelt = geodaten.to_crs('EPSG:31469')
     umgewandelt['entfernung'] = umgewandelt.geometry.apply(lambda g: math.floor(mcs.distance(g)))
 
-    preisinformationen = pd.read_csv(r'../../daten/2022-06-11-prices.csv')
+    preisinformationen = pd.read_csv(r'./daten/2022-06-11-prices.csv')
     preisinformationen = preisinformationen.groupby('station_uuid').mean()
     bewegungsdaten = pd.merge(preisinformationen, umgewandelt, left_on='station_uuid', right_on='uuid')
     bewegungsdaten = bewegungsdaten.sort_values(by=['entfernung'], ascending=True)
